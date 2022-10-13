@@ -1,0 +1,15 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2>THIS IS THE HOME PAGE</h2>
+
+    {%  if user.is_authenticated %}
+        <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+        <p>Username: {{ user.username }}</p>
+        <p>email: {{ user.email }}</p>
+
+    {% endif %}
+    <a class="btn btn-sm btn-link" href={% url 'services' %}>We offer</a>
+
+{% endblock %}

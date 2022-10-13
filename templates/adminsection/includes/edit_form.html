@@ -1,0 +1,22 @@
+
+<form method="POST" class="appointment-form">
+	{% csrf_token %}
+<div class="form-group">
+    {{ form.as_p }}
+{#	{% for field in form %}#}
+
+
+{#      {% if field in form %}#}
+{#		<label for="id_{{ field.name }}">{{ field.label }}: </label>#}
+{#		<input type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"#}
+{#		id="id_{{ field.name }}" value="{{ field.name.values }}">#}
+{#       {% else %}#}
+{#        <label for="id_{{ field.name }}">{{ field.label }}: </label>#}
+{#        <input type="{{ field.field.widget.checkobox }}"  class="form-control" name="{{ field.name }}"#}
+{#        id="id_{{ field.name }}" value="{{ field.name.values }}">#}
+{#      {% endif %}#}
+	</div>
+{#	{% endfor %}#}
+
+	<button type="submit" name="submit" class="btn btn-success">Update</button>
+</form>

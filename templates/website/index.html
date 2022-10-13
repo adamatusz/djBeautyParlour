@@ -1,0 +1,134 @@
+{% extends 'adminsection/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="col-md-12 text-right">
+        <a href="{% url 'services' %}" class="btn btn-secondary btn-sm ">Services</a>
+     </div>
+    <section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'images/1.jpg' %});" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+          <div class="col-md-9 ftco-animate pb-5">
+            &nbsp;<p class="h1 text-xl-center text-danger">Natura is the most beautiful</p>
+            <p class="breadcrumbs"><span class="mr-2"><i class="ion-ios-arrow-forward"></i></span> </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+      <ul class="nav-item ml-auto">
+        {% if user.is_authenticated %}
+          <ul class="btn-sm text-right">
+            <a class="btn-sm" href="{% url 'logout' %}">Logout</a>
+          </ul>
+            {% else %}
+          <ul class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </ul>
+        {% endif %}
+      </ul>
+
+<section id="home-section">
+ <div class="text mt-5">
+            <h1 class="mb-4">Beauty Salon</h1>
+            <p class="mb-4">This parlour provides huge facilities with advanced technology equipments
+                and best quality service. Here we offer the best treatment that you might have never
+                experienced before.</p>
+             <p class="mb-4">We pride ourselves on our high quality work and attention to detail. The
+                products we use are of top quality branded products.</p>
+</div>
+</section>
+
+<div class="form">
+<br>
+<section class="ftco-section ftco-no-pt ftco-booking">
+    <div class="container-fluid px-0">
+        <div class="row no-gutters d-md-flex justify-content-end">
+            <div class="one-forth d-flex align-items-end">
+                <div class="text">
+                    <div class="overlay"></div>
+                    <div class="appointment-wrap">
+                        <span class="subheading">Reservation</span>
+                        <h3 class="mb-2">We are waiting on your appointment</h3>
+                        {% if form.errors %}
+                        {% for field in form %}
+                        {% for error in field.errors %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                        {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <form action="" method="POST" class="appointment-form">
+                            {% csrf_token %}
+
+                            <div class="row">
+                                {% for field in form %}
+                                {% if field.name == 'Service' %}
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="select-wrap">
+
+                                            <select name="Service" id="Service" required="true" data-placeholder="Choose tags ..." multiple
+                                            class="form-control" multiple >
+
+                                                <option value="">Select Services</option>
+                                                {% for service in services %}
+                                                <option value="{{ service.id }}">
+                                                    {{ service.ServiceName }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="{{ field.field.widget.input_type }}"
+                                            class="form-control {{ field.field.widget.attrs.class }}"
+                                            name="{{ field.name }}" id="id_{{ field.name }}"
+                                            placeholder="{{ field.field.widget.attrs.placeholder }}"
+                                            required="true">
+
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control appointment_date" placeholder="Date"
+                                        name="applydate" id='applydate' required="true">
+                                </div>
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Make an Appointment"
+                                    class="btn btn-primary">
+                            </div>
+                        </form>
+
+</section>
+</div>
+    <section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'images/beauty1.jpg' %});" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+          <div class="col-md-9 ftco-animate pb-5">
+            <p class="h2 text-xl-center text-danger">Our beauty parlour is a place where you will feel like you are in paradise</p>
+            <p class="breadcrumbs"><span class="mr-2"><i class="ion-ios-arrow-forward"></i></span> </p>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'adminsection/base.html' %}
+{% block content %}
+
+<div id="page-wrapper">
+	<div class="main-page">
+		<div class="tables">
+			<h3 class="title1">Assign Services</h3>
+			<div class="table-responsive bs-example widget-shadow">
+				<h4>Assign Services:</h4>
+				<form action="" method="POST" >
+					{% csrf_token %}
+					
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Service Name</th>
+								<th>Service Price</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+		
+							{% for service in Services %}
+							<tr>
+								<th scope="row">{{ forloop.counter }}</th>
+								<td>
+                                    <input type="hidden" name="customerid" value="{{ customer.id }}"/>{{ service.ServiceName}}
+                                </td>
+								<td>
+									<input type="text" name="cost" id="cost_{{ service.id }}" value="{{ service.Cost }}" disabled/>
+								</td>
+								<td>
+                                    <input type="checkbox" name="serviceid" value="{{ service.id }}" onchange="check()"  id="checkbox_{{ service.id }}"><br>
+                                </td>
+							</tr> 
+						{% endfor %}
+
+							<tr>
+								<th>
+									<h2>Total</h2>
+								</th>
+								<th>
+									<h2 id="total"></h2>   
+								</th>
+							</tr>
+							<tr>
+								<td colspan="5">
+									<button type="submit" name="submit" class="btn btn-secondary btn-sm">Submit</button>
+								</td>
+
+							</tr>
+							
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+<script> 
+     
+	{% for service in Services %}
+   
+			   $('#checkbox_{{ service.id }}').click(function() {
+			   var cb{{ service.id }} = $('#checkbox_{{ service.id }}').is(':checked');
+			   });
+
+   {% endfor %}
+   var x = document.createElement("INPUT");
+   function check() {
+   
+   var add = 0;  
+   var a = 1;  
+   {% for service in Services  %}
+	   if(document.getElementById('checkbox_{{ service.id }}').checked) {
+	   add += document.getElementById('cost_{{ service.id }}').value * a
+	   }  
+   {% endfor %}
+
+   var p = add;
+   var price = p ; 
+   document.getElementById('total').innerHTML = price;
+   }
+   
+   check();
+   
+   
+   
+   </script>
+{% endblock %}

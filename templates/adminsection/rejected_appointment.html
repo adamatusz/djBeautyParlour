@@ -1,0 +1,40 @@
+{% extends 'adminsection/base.html' %}
+
+{% block content %}
+
+&nbsp;
+    <h4>All Rejected Appointment:</h4>
+<div class="table table-striped table-bordered table-hover">
+        <table class="table table-bordered">
+            <thead class="table-danger">
+                <tr>
+                    <th>#</th>
+                    <th>Appointment Number</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Appointment Date</th>
+                    <th>Appointment Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in rejectedtedappointments %}
+
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ list.AppointmentNumber}}</td>
+                    <td>{{ list.Name}}</td>
+                    <td>{{ list.PhoneNumber}}</td>
+                    <td>{{ list.AppointmentDate}}</td>
+                    <td>{{ list.AppointmentTine|date:"H i A"}}</td>
+                    <td><a href="{% url 'viewappointment' list.id %}">View</a></td>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>&nbsp;
+        </table>
+        <div>
+            <a href="{% url 'allappointment' %}" class="btn btn-secondary btn-sm">all_appointment</a>
+        </div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'adminsection/base.html' %}
+
+{% block content %}
+
+<div class="table-responsive bs-example widget-shadow">
+    <h4>Search Appointment / Name / Email:</h4>
+    <div class="form-body">
+        <form method="GET" name="search" action="">
+            <div class="form-group"> <label for="exampleInputEmail1">Searched:</label>
+                <input id="searchdata" type="text" name="searchdata" required="true" class="form-control">
+                <br>
+                <button type="submit" name="search" class="btn btn-primary btn-sm">Search</button>
+            </div>
+        </form>
+    </div>
+
+    {% if appointment_list %}
+    <h4>Result against "{{ query }}" keyword </h4>
+
+    <table class="table table-bordered">
+        <thead class="table-danger">
+            <tr>
+                <th>#</th>
+                <th>Appointment Number</th>
+                <th>Name</th>
+                <th>Mobile Number</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointment_list %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ appointment.AppointmentNumber }}</td>
+                <td>{{ appointment.Name }}</td>
+                <td>{{ appointment.PhoneNumber }}</td>
+                <td>{{ appointment.AppointmentDate }}</td>
+                <td>{{ appointment.AppointmentTine }}</td>
+                <td><a href="{% url 'viewappointment' appointment.id %}">View</a></td>
+            </tr>
+
+            {% endfor %}
+        {% else %}
+        {% if query %}
+        <tr>
+            <td colspan="8"> No record found against this search</td>
+
+        </tr>
+        {% endif %}
+        {% endif %}
+
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

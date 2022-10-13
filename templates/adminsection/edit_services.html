@@ -1,0 +1,18 @@
+{% extends 'adminsection/base.html' %}
+
+{% block content %}
+
+<div id="page-wrapper">
+	<div class="main-page">
+		<div class="forms">
+			<h3 class="title1">Update Services</h3><br/>
+				<div class="form-title" >
+                <h4>Parlour Services:</h4>
+                </div>
+				<div class="changelist-form-container" >
+					{% include 'adminsection/includes/edit_form.html' with form=form %}
+				</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

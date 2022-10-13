@@ -1,0 +1,57 @@
+{% extends 'adminsection/base.html' %}
+
+{% block content %}
+&nbsp;<h4>Between dates reports:</h4>&nbsp;
+</div>
+    <div class="form-body">
+        <form method="GET" name="bwdatesreport" action="" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="exampleInputEmail1">
+                    From Date
+                </label>
+                <input type="date" class="form-control1 appointment_time" name="from_date" id='atime'
+                    required="true">
+            </div>
+            <div class="form-group"> <label for="exampleInputPassword1">To Date</label>
+
+                <input type="date" class="form-control1" name="to_date" id="todate" value=""
+                    required='true'> </div>
+
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>&nbsp;
+
+
+        {% if invoice_list %}
+
+        <h5 style="color:blue">Report from {{ from_date }} to {{ to_date }}
+        </h5><br>
+
+      <div class="table table-striped table-bordered table-hover">
+        <table class="table table-bordered">
+            <thead class="table-danger">
+                <tr>
+                    <th>#</th>
+                    <th>Invoice Id</th>
+                    <th>Customer Name</th>
+                    <th>Invoice Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for invoice in invoice_list %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ invoice.BillingNumber }}</td>
+                    <td>{{ invoice.Customer }}</td>
+                    <td>{{ invoice.Date}}</td>
+                    <td><a href="{% url 'viewinvoice' invoice.id %}">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}

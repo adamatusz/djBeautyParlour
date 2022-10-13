@@ -1,0 +1,45 @@
+{% extends 'adminsection/base.html' %}
+{% load static %}
+  {% block content %}
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'images/2.jpg' %});" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+          <div class="col-md-9 ftco-animate pb-5">
+            <h2 class="mb-0 bread">Services</h2>
+            <p class="breadcrumbs">
+             {% if user.is_authenticated %}
+                <span class="mr-2"><a href={% url 'home' %} >Make Appointment <i class="ion-ios-arrow-forward"></i></a></span>
+             {% else %}
+                <a class="navbar-brand" href="{% url 'login' %}">Login</a></p>
+             {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="ftco-section ftco-pricing">
+			<div class="container">
+				<div class="row justify-content-center pb-3">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<h1 class="big">Pricing</h1>
+          	<span class="subheading">Pricing</span>
+            <h2 class="mb-4">Our Service Prices</h2>
+            <p>Far far away, behind the word mountains</p>
+          </div>
+        </div>
+            <div class="table table-striped table-bordered table-hover">
+            <table class="table table-bordered"> <thead class="table-danger"> <tr> <th>#</th> <th>Service Name</th> <th>Service Price</th> </tr> </thead> <tbody>
+              {% for service in services %}
+              <tr> <th scope="row">	</th>  <td>{{ service.ServiceName }} 	</td> <td>{{ service.Cost }}</td>
+
+            {% endfor %}
+            </tbody> </table>
+            </div>
+			</div>
+		</section>
+    <br>
+    {% endblock %}

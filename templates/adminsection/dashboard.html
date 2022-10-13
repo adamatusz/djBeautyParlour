@@ -1,0 +1,42 @@
+{% extends 'adminsection/base.html' %}
+{% block content %}
+&nbsp;
+<h1>Admin Section Summary</h1>&nbsp;
+
+<table class="table table-striped table-bordered table-hover">
+ <thead class="table-info">
+      <tr>
+          <th scope="col">Total Customer</th>
+          <th scope="col">Total Appointment</th>
+          <th scope="col">Total Accepted Appointment</th>
+          <th scope="col">Total Rejected Appointment</th>
+          <th scope="col">Total New Appointment</th>
+          <th scope="col">Total Services</th>
+          <th scope="col">Today Sales</th>
+          <th scope="col">Yesterday Sales</th>
+          <th scope="col">Last Sevendays Sales</th>
+          <th scope="col">Total Sales</th>
+      </tr>
+ </thead>
+
+ <tbody>
+
+       <tr>
+          <td>{{ total_customer }}</td>
+          <td>{{ total_appointment }}</td>
+          <td>{{ total_accepted_appointment }}</td>
+          <td>{{ total_Rejected_appointment }}</td>
+          <td>{{ total_new_appointment }}</td>
+          <td>{{ total_service }}</td>
+          <td>{{ today_sales.Categories__Cost__sum|floatformat:"g" }} </td>
+          <td>{{ yesterday_sales.Categories__Cost__sum|floatformat:"g" }} </td>
+          <td>{{ last_seven_days_sales.Categories__Cost__sum|floatformat:"g"}} </td>
+          <td>{{ total_sales.Categories__Cost__sum|floatformat:"g" }} </td>
+       </tr>
+
+ </tbody>
+</table>
+    <a href="{% url 'allappointment' %}" class="btn btn-secondary btn-sm">all_appointment</a>
+    <a href="{% url 'newappointment' %}" class="btn btn-secondary btn-sm">new_appointment</a><br/><br/>
+    <a href="{% url 'invoices' %}" class="btn btn-danger btn-sm">all_invoices</a>
+{% endblock %}

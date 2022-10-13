@@ -1,0 +1,23 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+<h2 class="text-center">Register</h2>
+
+<div class="col-md-6 offset-md-4">
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% if form.errors %}
+            <p>Your Form Has Error...</p>
+        {% endif %}
+
+        {{ form.as_p }}
+        <tr>
+        <td colspan="2">
+        <input type="submit" value="Register" class="btn btn-secondary btn-sm"></input>
+        </td>
+        </tr>
+    </form>
+</div>
+{% endblock %}

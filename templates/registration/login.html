@@ -1,0 +1,27 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+
+
+{% block content %}
+    <h2 class="text-center">LogIn</h2><br/>
+    <h6 class="text-center"> Register tu your account </h6>
+
+   <div class="col-md-6 offset-md-4">
+        <form method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+            <input type="submit" value="LogIn"> OR
+        </form></div><br/>
+
+
+       <div class="col-md-7 offset-md-4">
+            <form action="{% url 'register' %}" class="form-inline my-2 my-lg-0" method="POST">
+                {% csrf_token %}
+                <input class="btn btn-primary btn-sm" type="submit" value="Register">
+            </form>
+       </div>
+
+
+{% endblock %}
